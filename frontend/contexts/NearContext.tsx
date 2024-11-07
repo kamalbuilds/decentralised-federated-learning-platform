@@ -1,3 +1,4 @@
+"use client";
 import { createContext, useContext, useEffect, useState } from 'react';
 import { connect, WalletConnection } from 'near-api-js';
 import { FederatedLearning } from '../utils/near-interface';
