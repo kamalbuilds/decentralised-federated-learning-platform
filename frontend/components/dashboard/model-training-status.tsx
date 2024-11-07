@@ -31,7 +31,7 @@ export function ModelTrainingStatus() {
       <div className="space-y-4">
         <Progress value={progress} />
         
-        <div className="grid grid-cols-2 gap-4">
+        {/* <div className="grid grid-cols-2 gap-4">
           <MetricCard
             title="Accuracy"
             value={metrics.accuracy}
@@ -42,7 +42,7 @@ export function ModelTrainingStatus() {
             value={metrics.loss}
             change={metrics.lossChange}
           />
-        </div>
+        </div> */}
       </div>
     </Card>
   )

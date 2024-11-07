@@ -38,7 +38,7 @@ export default function LandingPage() {
               </div>
               <div className="space-x-4">
                 <Button asChild>
-                  <Link href="#features">Explore Features</Link>
+                  <Link href="/dashboard">Explore Dashboard</Link>
                 </Button>
                 <Button variant="outline" asChild>
                   <Link href="https://github.com/kamalbuilds/decentralised-federated-learning-platform">

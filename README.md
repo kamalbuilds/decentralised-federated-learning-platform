@@ -15,7 +15,7 @@ A blockchain-based federated learning platform built on NEAR Protocol that enabl
 
 - **Frontend**: Next.js, TypeScript, TailwindCSS
 - **Smart Contract**: Rust, near-sdk
-- **Blockchain**: NEAR Protocol
+- **Blockchain**: NEAR 
 - **Machine Learning**: TensorFlow.js
 
 ## Prerequisites

@@ -1,3 +1,5 @@
+
+"use client"
 import { Suspense } from "react"
 import { ModelTrainingStatus } from "@/components/dashboard/model-training-status"
 import { DatasetStats } from "@/components/dashboard/dataset-stats"
