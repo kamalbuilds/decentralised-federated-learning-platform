@@ -14,10 +14,15 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
   },
   "dependencies": {
+    "@radix-ui/react-progress": "^1.1.0",
+    "@radix-ui/react-scroll-area": "^1.2.0",
     "@radix-ui/react-slot": "^1.0.2",
+    "@tensorflow/tfjs": "^4.22.0",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
+    "encoding": "^0.1.13",
     "lucide-react": "0.105.0-alpha.4",
+    "near-api-js": "^5.0.1",
     "next": "^13.4.8",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
