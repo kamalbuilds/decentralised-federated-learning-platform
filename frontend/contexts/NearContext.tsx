@@ -48,7 +48,8 @@ export function NearProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = () => {
     walletConnection?.requestSignIn({
-      contractId: 'contract.near', // Replace with your actual contract ID
+      contractId: 'federated-learning.testnet',
+      keyType: 'ed25519',
     });
   };
 
