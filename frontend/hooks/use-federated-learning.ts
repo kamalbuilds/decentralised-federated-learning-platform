@@ -1,36 +1,49 @@
 import { useState, useEffect, useCallback } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import { FederatedLearningClient } from '@/lib/ml/federatedLearning';
-
-const MODEL_ARCHITECTURE = {
-  layers: [
-    { className: 'Dense', config: { units: 64, activation: 'relu', inputShape: [28, 28] } },
-    { className: 'Dense', config: { units: 32, activation: 'relu' } },
-    { className: 'Dense', config: { units: 10, activation: 'softmax' } }
-  ]
-};
+import { EnvironmentalModelArchitecture } from '@/lib/ml/models/environmental';
+import type { EnvironmentalData } from '@/lib/ml/utils/preprocessing';
+import { useNearWallet } from '@/hooks/use-near-wallet';
 
 export function useFederatedLearning() {
   const [client, setClient] = useState<FederatedLearningClient | null>(null);
   const [progress, setProgress] = useState(0);
   const [metrics, setMetrics] = useState<any>(null);
   const [isTraining, setIsTraining] = useState(false);
+  const { wallet } = useNearWallet();
+
+  // Generate mock environmental data
+  const generateMockData = (): EnvironmentalData[] => {
+    return Array(100).fill(null).map(() => ({
+      timestamp: Date.now(),
+      pm25: Math.random() * 100,
+      pm10: Math.random() * 150,
+      no2: Math.random() * 50,
+      so2: Math.random() * 20,
+      co: Math.random() * 10,
+      o3: Math.random() * 100,
+      temperature: Math.random() * 40,
+      humidity: Math.random() * 100,
+      windSpeed: Math.random() * 30,
+      windDirection: Math.random() * 360
+    }));
+  };
 
   // Initialize client when component mounts
   useEffect(() => {
-    const mockData = {
-      x: Array(100).fill(0).map(() => Array(784).fill(0).map(() => Math.random())),
-      y: Array(100).fill(0).map(() => Array(10).fill(0).map(() => Math.random()))
-    };
-
-    const newClient = new FederatedLearningClient(MODEL_ARCHITECTURE, mockData);
+    const mockData = generateMockData();
+    const newClient = new FederatedLearningClient(
+      EnvironmentalModelArchitecture,
+      mockData,
+      wallet
+    );
     setClient(newClient);
 
     // Cleanup
     return () => {
       newClient.dispose();
     };
-  }, []);
+  }, [wallet]);
 
   const startTraining = useCallback(async () => {
     if (!client || isTraining) return;

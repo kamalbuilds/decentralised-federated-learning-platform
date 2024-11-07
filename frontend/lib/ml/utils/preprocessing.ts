@@ -21,12 +21,14 @@ export function preprocessEnvironmentalData(data: EnvironmentalData[]) {
     d.temperature, d.humidity, d.windSpeed, d.windDirection
   ]);
 
-  // Normalize the data
+  // Normalize the data using min-max normalization
   const tensorData = tf.tensor2d(features);
   const normalizedData = tf.tidy(() => {
-    const mean = tensorData.mean(0);
-    const std = tensorData.std(0);
-    return tensorData.sub(mean).div(std);
+    const min = tensorData.min(0);
+    const max = tensorData.max(0);
+    // Avoid division by zero by adding a small epsilon
+    const range = tf.maximum(max.sub(min), tf.scalar(1e-6));
+    return tensorData.sub(min).div(range);
   });
 
   return normalizedData;
