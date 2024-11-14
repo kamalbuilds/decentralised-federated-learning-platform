@@ -11,6 +11,52 @@ A blockchain-based federated learning platform built on NEAR Protocol that enabl
 - Participant management system
 - Reward distribution mechanism
 
+## Flow Diagram
+
+```mermaid
+graph TB
+subgraph Frontend
+UI[User Interface]
+ML[TensorFlow.js Model]
+WI[Wallet Integration]
+subgraph ML Components
+PP[Data Preprocessing]
+TR[Model Training]
+DP[Differential Privacy]
+end
+UI --> WI
+UI --> ML
+ML --> PP
+ML --> TR
+TR --> DP
+end
+subgraph Smart Contract
+PR[Participant Registry]
+MU[Model Updates]
+RD[Reward Distribution]
+MS[Model Status]
+end
+subgraph NEAR Protocol
+BC[Blockchain]
+WL[Wallet]
+end
+%% Frontend to Smart Contract Interactions
+WI --> WL
+DP --> MU
+UI --> PR
+UI --> MS
+%% Smart Contract to Blockchain
+PR --> BC
+MU --> BC
+RD --> BC
+MS --> BC
+%% Blockchain to Wallet
+BC --> WL
+style Frontend fill:#f9f9f9,stroke:#333,stroke-width:2px
+style Smart Contract fill:#e6f3ff,stroke:#333,stroke-width:2px
+style NEAR Protocol fill:#f0fff0,stroke:#333,stroke-width:2px?
+```
+
 ## Tech Stack
 
 - **Frontend**: Next.js, TypeScript, TailwindCSS
